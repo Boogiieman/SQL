@@ -1,0 +1,12 @@
+create table student(s_id int,s_name varchar(100),s_mark float,s_sem varchar(100),constraint pk primary key(s_id));
+desc student;
+------------------------------------------------------------------------------------------------------------
+create table faculty(f_id int,f_name varchar(100),f_department varchar(100),f_salary float,constraint kp  primary key(f_id));
+desc faculty;
+------------------------------------------------------------------------------------------------------------
+create table three(c_id int,c_name varchar(50),c_fee float,duration varchar(50),s_id int, constraint kk primary key(c_id),constraint sk foreign key(s_id) references student (s_id));
+desc three;
+-----------------------------------------------------------------------------------------------------------
+alter table three drop column c_name;
+desc three;
+------------------------------------------------------------------------------------------------------------
