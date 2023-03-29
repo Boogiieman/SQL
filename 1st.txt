@@ -1,0 +1,184 @@
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed Mar 29 13:44:37 2023
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Production
+With the Partitioning, OLAP and Data Mining options
+
+SQL> create table Student(Roll_no int,S_name varchar(20),S_address varc
+  2  
+SQL> create table Student(Roll_no int,S_name varchar(20),S_address varc
+create table Student(Roll_no int,S_name varchar(20),S_address varchar(2
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table Student;
+
+Table dropped.
+
+SQL> 
+SQL> 
+SQL>  create table Student(Roll_no int,S_name varchar(20),S_address var
+
+Table created.
+
+SQL> desc Student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- -------------------
+ ROLL_NO                                            NUMBER(38)
+ S_NAME                                             VARCHAR2(20)
+ S_ADDRESS                                          VARCHAR2(20)
+
+SQL> alter table Student add constraint pk primary key(Roll_no);
+
+Table altered.
+
+SQL> desc Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- -------------------
+ ROLL_NO                                   NOT NULL NUMBER(38)
+ S_NAME                                             VARCHAR2(20)
+ S_ADDRESS                                          VARCHAR2(20)
+
+SQL>  create table Marksheet(Roll_no int,sub1 int,sub2 int, sub3 int);
+
+Table created.
+
+SQL> alter table Marksheet add constraint fk foreign key (Roll_no) refe
+
+Table altered.
+
+SQL> desc Marksheet;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- -------------------
+ ROLL_NO                                            NUMBER(38)
+ SUB1                                               NUMBER(38)
+ SUB2                                               NUMBER(38)
+ SUB3                                               NUMBER(38)
+
+SQL> insert into table Student values(1,'Rahul','Pattom');
+insert into table Student values(1,'Rahul','Pattom')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL>  insert into Student values(1,'Rahul','Pattom');
+
+1 row created.
+
+SQL> insert into Student values(2,'Sachin','Ambalam Mukku');
+
+1 row created.
+
+SQL> insert into Student values(3,'Sourav','Nalanchira');
+
+1 row created.
+
+SQL> select * from Student;
+
+   ROLL_NO S_NAME               S_ADDRESS
+---------- -------------------- --------------------
+         1 Rahul                Pattom
+         2 Sachin               Ambalam Mukku
+         3 Sourav               Nalanchira
+
+SQL> select * from Marksheet;
+
+no rows selected
+
+SQL> 
+
+SQL> insert into Marksheet values(1,78,30,45);
+
+1 row created.
+
+SQL>  insert into Marksheet values(2,45,65,50);
+
+1 row created.
+
+SQL>  insert into Marksheet values(3,60,87,33);
+
+1 row created.
+
+SQL> select * from Marksheet;
+
+   ROLL_NO       SUB1       SUB2       SUB3
+---------- ---------- ---------- ----------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+SQL> alter table Marksheet add Grade varchar(20);
+
+Table altered.
+
+SQL> alter table Marksheet drop column Sub2;
+
+Table altered.
+
+SQL> select * from Marksheet;
+
+   ROLL_NO       SUB1       SUB3 GRADE
+---------- ---------- ---------- --------------------
+         1         78         45
+         2         45         50
+         3         60         33
+
+SQL> alter table Student add phone_no int;
+
+Table altered.
+
+SQL> alter table Student add constraint len check(length(phone_no)=10)
+  2  ;
+
+Table altered.
+
+SQL> select * from Student where S_address='Pattom';
+
+   ROLL_NO S_NAME               S_ADDRESS              PHONE_NO
+---------- -------------------- -------------------- ----------
+         1 Rahul                Pattom
+
+SQL> select sub1+sub3 as total_mark from Marksheet where Roll_no=2;
+
+TOTAL_MARK
+----------
+        95
+
+SQL> select S_name from Student where Roll_no=2;
+
+S_NAME
+--------------------
+Sachin
+
+SQL> insert into Student(phone_no) values (1234567892);
+insert into Student(phone_no) values (1234567892)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("DB58"."STUDENT"."ROLL_NO")
+
+
+SQL> update Student set Phone_no=8893162123 where S_name='Sachin'
+  2  ;
+
+1 row updated.
+
+SQL> select phone_no from Student where name='Sachin';
+select phone_no from Student where name='Sachin'
+                                   *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier
+
+
+SQL> select phone_no from Student where S_name='Sachin';
+
+  PHONE_NO
+----------
+8893162123
+
+SQL> 
