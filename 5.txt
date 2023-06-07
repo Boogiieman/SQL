@@ -1,0 +1,4 @@
+5.
+a. select * from stf,stu where stf.depid=stu.depid;
+b. select name,salary from stf where salary in (select max(salary) from stf group by depid);
+c. select distinct stf.name from stf,stu where stf.salary>25000 and stf.city=stu.city;co

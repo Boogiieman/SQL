@@ -1,0 +1,439 @@
+SQL> create table Student(Roll_no int,S_name varchar(100),S_address varchar(100),constraint 
+ry key
+  2  (Roll_no));
+
+Table created.
+
+SQL> create table Student(Roll_no int,S_name varchar(100),S_address varchar(100),constraint 
+ry key
+  2  (Roll_no));
+create table Student(Roll_no int,S_name varchar(100),S_address varchar(100),constraint pk pr
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> drop table Student;
+
+Table dropped.
+
+SQL> create table Student(Roll_no int,S_name varchar(100),S_address varchar(100),constraint 
+ry key
+  2  (Roll_no));
+
+Table created.
+
+SQL> desc Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(38)
+ S_NAME                                             VARCHAR2(100)
+ S_ADDRESS                                          VARCHAR2(100)
+
+SQL> create table Marksheet(Roll_no int,sub1 int,sub2 int,sub3 int,constraint fk foreign key
+) references Student(Roll_no));
+
+Table created.
+
+SQL> desc Marksheet;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                            NUMBER(38)
+ SUB1                                               NUMBER(38)
+ SUB2                                               NUMBER(38)
+ SUB3                                               NUMBER(38)
+
+SQL> insert into Student values(1,'Rahul,'Pattom);
+insert into Student values(1,'Rahul,'Pattom)
+                                     *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into Student values(1,'Rahul,'Pattom');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into Student values(1,'Rahul,'Pattom');
+ERROR:
+ORA-01756: quoted string not properly terminated
+
+
+SQL> insert into Student values(1,'Rahul','Pattom');
+
+1 row created.
+
+SQL> insert into Student values(2,'Sachin','Ambalam Mukku');
+
+1 row created.
+
+SQL> insert into Student values(3,'Sourav','Nalanchira');
+
+1 row created.
+
+SQL> select * from Student;
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+         1
+Rahul
+Pattom
+
+         2
+Sachin
+Ambalam Mukku
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+
+         3
+Sourav
+Nalanchira
+
+
+SQL> select * from Student;
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+         1
+Rahul
+Pattom
+
+         2
+Sachin
+Ambalam Mukku
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+
+         3
+Sourav
+Nalanchira
+
+
+SQL> insert into Marksheet(1,78,30,45);
+insert into Marksheet(1,78,30,45)
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into Marksheet values(1,78,30,45);
+
+1 row created.
+
+SQL> insert into Marksheet values(2,45,65,50);
+
+1 row created.
+
+SQL> insert into Marklist values(3,60,87,33);
+insert into Marklist values(3,60,87,33)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> insert into Marksheet  values(3,60,87,33);
+
+1 row created.
+
+SQL> select * from Marksheet;
+
+   ROLL_NO       SUB1       SUB2       SUB3
+---------- ---------- ---------- ----------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+SQL> select * from Student;
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+         1
+Rahul
+Pattom
+
+         2
+Sachin
+Ambalam Mukku
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+
+         3
+Sourav
+Nalanchira
+
+
+SQL> alter table Marksheet add Grade varchar(10);
+
+Table altered.
+
+SQL> select * from Marksheet;
+
+   ROLL_NO       SUB1       SUB2       SUB3 GRADE
+---------- ---------- ---------- ---------- ----------
+         1         78         30         45
+         2         45         65         50
+         3         60         87         33
+
+SQL> alter table Marksheet drop column sub2;
+
+Table altered.
+
+SQL> select * from Marksheet;
+
+   ROLL_NO       SUB1       SUB3 GRADE
+---------- ---------- ---------- ----------
+         1         78         45
+         2         45         50
+         3         60         33
+
+SQL> alter table Student add phone_no int,
+  2  constraint len check(length(phone_no)=10);
+alter table Student add phone_no int,
+                                    *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL>  alter table Student add phone_no, constraint len check(length(phone_no)=10);
+ alter table Student add phone_no, constraint len check(length(phone_no)=10)
+                                 *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table Student add phone_no int,check(length(phone_no)=10);
+alter table Student add phone_no int,check(length(phone_no)=10)
+                                    *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table Student add phone_no int;
+
+Table altered.
+
+SQL> alter table Student add constraint len check(length(phone_no)=10);
+
+Table altered.
+
+SQL> insert into Student (phone_no)values('9633512167');
+insert into Student (phone_no)values('9633512167')
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("DB57"."STUDENT"."ROLL_NO")
+
+
+SQL>  insert into Student values(4,'shahin','kadakkal',9633512167);
+
+1 row created.
+
+SQL> insert into Student values(5,'shahin','kadakkal',963351);
+insert into Student values(5,'shahin','kadakkal',963351)
+*
+ERROR at line 1:
+ORA-02290: check constraint (DB57.LEN) violated
+
+
+SQL> select * from student where address='Pattom');
+select * from student where address='Pattom')
+                                            *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL>  select * from student where address='Pattom';
+ select * from student where address='Pattom'
+                             *
+ERROR at line 1:
+ORA-00904: "ADDRESS": invalid identifier
+
+
+SQL> select * from student where s_address='Pattom';
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         1
+Rahul
+Pattom
+
+
+
+SQL> select * from student where s_address='Pattom';
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         1
+Rahul
+Pattom
+
+
+
+SQL> select * from Marksheet sum(sub1,sub2,sub3) where Roll_no=2;
+select * from Marksheet sum(sub1,sub2,sub3) where Roll_no=2
+                           *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select sum(sub1,sub2,sub3) from Marksheet where Roll_no=2;
+select sum(sub1,sub2,sub3) from Marksheet where Roll_no=2
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select sub1+sub3 as total_mark where Roll_no=2;
+select sub1+sub3 as total_mark where Roll_no=2
+                               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select sub1+sub3 as total_mark from Marklist where Roll_no=2;
+select sub1+sub3 as total_mark from Marklist where Roll_no=2
+                                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL>  select sub1+sub3 as total_mark from Marksheet where Roll_no=2;
+
+TOTAL_MARK
+----------
+        95
+
+SQL> select S_name from Student where Roll_no=3
+  2  ;
+
+S_NAME
+--------------------------------------------------------------------------------
+Sourav
+
+SQL> insert into Student (phone_no) values (9033512167) where S-name='Sachin';
+insert into Student (phone_no) values (9033512167) where S-name='Sachin'
+                                                   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> insert into Student (phone_no) values (9033512167) where S_name='Sachin';
+insert into Student (phone_no) values (9033512167) where S_name='Sachin'
+                                                   *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> update Student set phone_no=9033502067 where S_name='Sachin';
+
+1 row updated.
+
+SQL> select * from Student;
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         1
+Rahul
+Pattom
+
+
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         2
+Sachin
+Ambalam Mukku
+9033502067
+
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         3
+Sourav
+Nalanchira
+
+
+
+   ROLL_NO
+----------
+S_NAME
+--------------------------------------------------------------------------------
+S_ADDRESS
+--------------------------------------------------------------------------------
+  PHONE_NO
+----------
+         4
+shahin
+kadakkal
+9633512167
+
+
+SQL> select phone_no from Student where name='Sachin';
+select phone_no from Student where name='Sachin'
+                                   *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier
+
+
+SQL>  select phone_no from Student where S_name='Sachin';
+
+  PHONE_NO
+----------
+9033502067

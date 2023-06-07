@@ -1,0 +1,5 @@
+6.
+a. select sysdate from dual;
+b. select to_char(sysdate,'hh24:mm:ss')from dual;
+c.  select to_char(sysdate-1,'day-month ddth yyyy') "yesterday" from dual;
+d. select abs(to_date('31-08-2023', 'dd-mm-yyyy') - to_date('01-06-2023', 'dd-mm-yyyy')) "difference" from dual;

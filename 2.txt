@@ -1,0 +1,345 @@
+2.
+ create table stu(studid int,name varchar(20),class varchar(20),city varchar(20),total_mark float,percentage float,depid int);
+create table stf(staffid int,name varchar(30),depid int,designation varchar(30),salary float,city varchar(20));
+ create table Dept(depid int,name varchar(30));
+create table comp(compid int, name varchar(30),city varchar(20),no_of_employees int);
+ create table emp(empid int,name varchar(30),compid int,designation varchar(30),salary float, city varchar(30));
+
+SQL> alter table stu  add constraint s primary key(studid);
+
+Table altered.
+
+SQL> alter table stf add constraint st primary key(staffid);
+
+Table altered.
+
+SQL> alter table dept add constraint d primary key(depid);
+
+Table altered.
+
+SQL> alter table comp add constraint co primary key(compid);
+
+Table altered.
+
+SQL> alter table emp add constraint e primary key(empid);
+
+Table altered.
+
+SQL> alter table stu add constraint stf foreign key(depid) references dept(depid);
+
+Table altered.
+
+SQL> alter table stf add constraint sf foreign key(depid) references dept(depid);
+
+Table altered.
+
+SQL> alter table emp add constraint ef foreign key(compid) references comp(compid);
+
+Table altered.
+
+SQL> desc stu;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDID                                    NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(20)
+ CLASS                                              VARCHAR2(20)
+ CITY                                               VARCHAR2(20)
+ TOTAL_MARK                                         FLOAT(126)
+ PERCENTAGE                                         FLOAT(126)
+ DEPID                                              NUMBER(38)
+
+SQL> desc stf;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STAFFID                                   NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ DEPID                                              NUMBER(38)
+ DESIGNATION                                        VARCHAR2(30)
+ SALARY                                             FLOAT(126)
+ CITY                                               VARCHAR2(20)
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPID                                     NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+
+SQL> desc comp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COMPID                                    NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ CITY                                               VARCHAR2(20)
+ NO_OF_EMPLOYEES                                    NUMBER(38)
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                     NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(30)
+ COMPID                                             NUMBER(38)
+ DESIGNATION                                        VARCHAR2(30)
+ SALARY                                             FLOAT(126)
+ CITY                                               VARCHAR2(30)
+
+SQL> insert into dept values(222,'mca');
+
+1 row created.
+
+SQL> insert into dept values(333,'bca');
+
+1 row created.
+
+SQL> insert into dept values(555,'mba');
+
+1 row created.
+
+SQL> insert into stu values(1,'reshma','s2','tvm',500,90,222);
+
+1 row created.
+
+SQL> insert into stu values(2,'ashik','s2','tvm',500,87,222);
+
+1 row created.
+
+SQL> insert into stu values(3,'bijith','s2','tvm',500,90,555);
+
+1 row created.
+
+SQL> insert into stf values(11,'rahul',222,'clerk',26000,'tvm');
+
+1 row created.
+
+SQL> insert into stf values(12,'devika',555,'proff',18000,'ekm');
+
+1 row created.
+
+SQL> insert into stf values(13,'shahin',555,'lab',18000,'alappy');
+
+1 row created.
+
+SQL> insert into comp values(21,'ust','tvm',10);
+
+1 row created.
+
+SQL> insert into comp values(22,'tcs','kochi',20);
+
+1 row created.
+
+SQL> insert into comp values(23,'xyz','ekm',4);
+
+1 row created.
+
+SQL> insert into emp values(31,'sheena',21,'ceo',25000,'tvm');
+
+1 row created.
+
+SQL> insert into emp values(32,'neethu',22,'md',24000,'ekm');
+
+1 row created.
+
+SQL> insert into emp values(33,'gopika',23,'clerk',26000,'ekm');
+
+1 row created.
+
+SQL> select * from stu;
+
+    STUDID NAME                 CLASS                CITY
+---------- -------------------- -------------------- --------------------
+TOTAL_MARK PERCENTAGE      DEPID
+---------- ---------- ----------
+         1 reshma               s2                   tvm
+       500         90        222
+
+         2 ashik                s2                   tvm
+       500         87        222
+
+         3 bijith               s2                   tvm
+       500         90        555
+
+
+SQL> select * from stf;
+
+   STAFFID NAME                                DEPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- --------------------
+        11 rahul                                 222
+clerk                               26000 tvm
+
+        12 devika                                555
+proff                               18000 ekm
+
+        13 shahin                                555
+lab                                 18000 alappy
+
+
+SQL> select * from dept;
+
+     DEPID NAME
+---------- ------------------------------
+       222 mca
+       333 bca
+       555 mba
+
+SQL> select * from emp;
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- ------------------------------
+        31 sheena                                 21
+ceo                                 25000 tvm
+
+        32 neethu                                 22
+md                                  24000 ekm
+
+        33 gopika                                 23
+clerk                               26000 ekm
+
+
+SQL> select * from comp;
+
+    COMPID NAME                           CITY                 NO_OF_EMPLOYEES
+---------- ------------------------------ -------------------- ---------------
+        21 ust                            tvm                               10
+        22 tcs                            kochi                             20
+        23 xyz                            ekm                                4
+
+SQL> select * from stu order by depid;
+
+    STUDID NAME                 CLASS                CITY
+---------- -------------------- -------------------- --------------------
+TOTAL_MARK PERCENTAGE      DEPID
+---------- ---------- ----------
+         1 reshma               s2                   tvm
+       500         90        222
+
+         2 ashik                s2                   tvm
+       500         87        222
+
+         3 bijith               s2                   tvm
+       500         90        555
+
+
+SQL> select * from stu order by depid desc;
+
+    STUDID NAME                 CLASS                CITY
+---------- -------------------- -------------------- --------------------
+TOTAL_MARK PERCENTAGE      DEPID
+---------- ---------- ----------
+         3 bijith               s2                   tvm
+       500         90        555
+
+         1 reshma               s2                   tvm
+       500         90        222
+
+         2 ashik                s2                   tvm
+       500         87        222
+
+
+SQL> select * from emp where salary>20000;
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- ------------------------------
+        31 sheena                                 21
+ceo                                 25000 tvm
+
+        32 neethu                                 22
+md                                  24000 ekm
+
+        33 gopika                                 23
+clerk                               26000 ekm
+
+
+SQL> select * from stu where percentage>80 and percentage<90;
+
+    STUDID NAME                 CLASS                CITY
+---------- -------------------- -------------------- --------------------
+TOTAL_MARK PERCENTAGE      DEPID
+---------- ---------- ----------
+         2 ashik                s2                   tvm
+       500         87        222
+
+
+SQL> select * from stu where dept='mca';
+select * from stu where dept='mca'
+                        *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL> select * from stu,dept where dept.name='mca';
+
+    STUDID NAME                 CLASS                CITY
+---------- -------------------- -------------------- --------------------
+TOTAL_MARK PERCENTAGE      DEPID      DEPID NAME
+---------- ---------- ---------- ---------- ------------------------------
+         1 reshma               s2                   tvm
+       500         90        222        222 mca
+
+         2 ashik                s2                   tvm
+       500         87        222        222 mca
+
+         3 bijith               s2                   tvm
+       500         90        555        222 mca
+
+
+SQL> update stf set salary=(10 * salary )/100 where designation='proff';
+
+1 row updated.
+
+SQL> select * from stf;
+
+   STAFFID NAME                                DEPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- --------------------
+        11 rahul                                 222
+clerk                               26000 tvm
+
+        12 devika                                555
+proff                                1800 ekm
+
+        13 shahin                                555
+lab                                 18000 alappy
+
+
+SQL> select * from emp emp.city=comp.city;
+select * from emp emp.city=comp.city
+                     *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL>  select * from emp,comp where emp.city=comp.city;
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- ------------------------------
+    COMPID NAME                           CITY                 NO_OF_EMPLOYEES
+---------- ------------------------------ -------------------- ---------------
+        31 sheena                                 21
+ceo                                 25000 tvm
+        21 ust                            tvm                               10
+
+        33 gopika                                 23
+clerk                               26000 ekm
+        23 xyz                            ekm                                4
+
+     EMPID NAME                               COMPID
+---------- ------------------------------ ----------
+DESIGNATION                        SALARY CITY
+------------------------------ ---------- ------------------------------
+    COMPID NAME                           CITY                 NO_OF_EMPLOYEES
+---------- ------------------------------ -------------------- ---------------
+
+        32 neethu                                 22
+md                                  24000 ekm
+        23 xyz                            ekm                                4
+
+
+

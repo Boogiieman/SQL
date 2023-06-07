@@ -1,0 +1,25 @@
+3.
+a. insert into dept values(222,'mca');
+ insert into dept values(333,'bca');
+ insert into dept values(555,'mba');
+ insert into stu values(1,'reshma','s2','tvm',500,90,222);
+ insert into stu values(2,'ashik','s2','tvm',500,87,222);
+ insert into stu values(3,'bijith','s2','tvm',500,90,555);
+insert into stf values(11,'rahul',222,'clerk',26000,'tvm');
+ insert into stf values(12,'devika',555,'proff',18000,'ekm');
+insert into stf values(13,'shahin',555,'lab',18000,'alappy');
+ insert into comp values(21,'ust','tvm',10);
+insert into comp values(22,'tcs','kochi',20);
+ insert into comp values(23,'xyz','ekm',4);
+ insert into emp values(31,'sheena',21,'ceo',25000,'tvm');
+insert into emp values(32,'neethu',22,'md',24000,'ekm');
+insert into emp values(33,'gopika',23,'clerk',26000,'ekm');
+c. select * from stu;
+select * from stf;
+select * from dept;
+select * from emp;
+select * from comp;
+b. select * from stu order by depid;
+ select * from stu order by depid desc;
+d. select * from emp where salary>20000;
+  e.  select * from stu where percentage>80 and percentage<90;

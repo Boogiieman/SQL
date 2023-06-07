@@ -10,3 +10,4 @@ desc three;
 alter table three drop column c_name;
 desc three;
 ------------------------------------------------------------------------------------------------------------
+create table Student(Roll_no int,S_name varchar(100),S_address varchar(100),constraint pk primary key(Roll_no));

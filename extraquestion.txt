@@ -1,0 +1,13 @@
+1. create table Employee_salary(empid int,basic_pay float,DA int,TA int,pay float,constraints p primary key (empid));
+2. create table Department(deptid int,dname varchar(10),constraints p1 primary key (deptid));
+3. create table Employee111(empid int,name varchar(40),designation varchar(40),DOJ varchar(30),address varchar(100),deptid int, constraints f foreign key (empid) references Employee_salary(empid), constraints f11 foreign key (deptid) references Department(deptid));
+
+4.insert into Employee_salary values(100,20000,5000,6000,31000);
+ insert into Employee_salary values(101,30000,6000,5000,40000);
+insert into Employee_salary values(102,25000,15000,6000,41000);
+
+5.insert into Department values(1,'MCA');
+insert into Department values(2,'BCA');
+ insert into Department values(3,'BSC');
+
+6.

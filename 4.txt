@@ -1,0 +1,11 @@
+4.
+a. select stu.name from stu,Dept where stu.depid=Dept.depid and Dept.name='mca';
+
+b. update stf set salary=(((10 * salary )/100)+salary) where designation='proff';
+
+c.  select emp.name from emp,comp where emp.city=comp.city and comp.compid=emp.compid;
+
+d. select depid,count(staffid) from stf group by depid;
+
+e. delete from emp where compid=23;
+delete from comp where no_of_employees<5;
